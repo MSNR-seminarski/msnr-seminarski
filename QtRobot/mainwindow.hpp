@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QDebug>
+#include <QString>
 
 namespace Ui
 {
@@ -21,6 +22,15 @@ public:
 private:
     Ui::MainWindow *ui;
     QSerialPort _serialConnection;
+
+    void write(const char *str);
+private slots:
+    void forward();
+    void back();
+    void left();
+    void right();
+    void buttonReleased();
+
 };
 
 #endif // MAINWINDOW_H
