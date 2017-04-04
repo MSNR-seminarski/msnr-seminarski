@@ -24,12 +24,21 @@ private:
     QSerialPort _serialConnection;
 
     void write(const char *str);
+    void killFocus(QWidget *w);
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
 private slots:
     void forward();
     void back();
     void left();
     void right();
+    void horn();
+    void light();
     void buttonReleased();
+
 
 };
 
