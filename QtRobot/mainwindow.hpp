@@ -36,7 +36,7 @@ private slots:
     void left();
     void right();
     void horn();
-    void light();
+    void alarm();
     void buttonReleased();
 
 

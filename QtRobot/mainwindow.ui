@@ -22,6 +22,12 @@
         <property name="text">
          <string>Left</string>
         </property>
+        <property name="autoRepeatDelay">
+         <number>0</number>
+        </property>
+        <property name="autoRepeatInterval">
+         <number>0</number>
+        </property>
        </widget>
       </item>
       <item>
@@ -31,12 +37,24 @@
           <property name="text">
            <string>Forward</string>
           </property>
+          <property name="autoRepeatDelay">
+           <number>0</number>
+          </property>
+          <property name="autoRepeatInterval">
+           <number>0</number>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="backButton">
           <property name="text">
            <string>Back</string>
+          </property>
+          <property name="autoRepeatDelay">
+           <number>0</number>
+          </property>
+          <property name="autoRepeatInterval">
+           <number>0</number>
           </property>
          </widget>
         </item>
@@ -46,6 +64,12 @@
        <widget class="QPushButton" name="rightButton">
         <property name="text">
          <string>Right</string>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>0</number>
+        </property>
+        <property name="autoRepeatInterval">
+         <number>0</number>
         </property>
        </widget>
       </item>
@@ -71,12 +95,24 @@
         <property name="text">
          <string>Horn</string>
         </property>
+        <property name="autoRepeatDelay">
+         <number>0</number>
+        </property>
+        <property name="autoRepeatInterval">
+         <number>0</number>
+        </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="lightButton">
+       <widget class="QPushButton" name="alarmButton">
         <property name="text">
-         <string>Light</string>
+         <string>Alarm</string>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>0</number>
+        </property>
+        <property name="autoRepeatInterval">
+         <number>0</number>
         </property>
        </widget>
       </item>

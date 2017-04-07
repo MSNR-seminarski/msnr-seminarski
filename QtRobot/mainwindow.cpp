@@ -4,7 +4,7 @@
 #include <QEvent>
 #include <QDebug>
 
-#define PORT_NAME "/dev/pts/5"
+#define PORT_NAME "/dev/ttyACM0"
 #define BAUD_RATE 9600
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -33,8 +33,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->rightButton, SIGNAL(released()), this, SLOT(buttonReleased()));
     connect(ui->hornButton, SIGNAL(pressed()), this, SLOT(horn()));
     connect(ui->hornButton, SIGNAL(released()), this, SLOT(buttonReleased()));
-    connect(ui->lightButton, SIGNAL(pressed()), this, SLOT(light()));
-    connect(ui->lightButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->alarmButton, SIGNAL(pressed()), this, SLOT(alarm()));
+    connect(ui->alarmButton, SIGNAL(released()), this, SLOT(buttonReleased()));
 
     //ui->centralWidget->installEventFilter(this);
     setFocus();
@@ -65,32 +65,39 @@ void MainWindow::write(const char *str)
 }
 void MainWindow::buttonReleased()
 {
-    this->write("stop");
+    char cValue = 5;
+    this->write(&cValue);
 }
 
 void MainWindow::forward()
 {
-    this->write("forward");
+    char cValue = 3;
+    this->write(&cValue);
 }
 void MainWindow::back()
 {
-    this->write("back");
+    char cValue = 4;
+    this->write(&cValue);
 }
 void MainWindow::left()
 {
-    this->write("left");
+    char cValue = 1;
+    this->write(&cValue);
 }
 void MainWindow::right()
 {
-    this->write("right");
+    char cValue = 2;
+    this->write(&cValue);
 }
 void MainWindow::horn()
 {
-    this->write("horn");
+    char cValue = 6;
+    this->write(&cValue);
 }
-void MainWindow::light()
+void MainWindow::alarm()
 {
-    this->write("light");
+    char cValue = 7;
+    this->write(&cValue);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -117,8 +124,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     case Qt::Key_H:
         horn();
         return;
-    case Qt::Key_L:
-        light();
+    case Qt::Key_Q:
+        alarm();
         return;
     default:
         QMainWindow::keyPressEvent(event);
@@ -139,7 +146,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
     case Qt::Key_Right:
     case Qt::Key_D:
     case Qt::Key_H:
-    case Qt::Key_L:
+    case Qt::Key_Q:
         buttonReleased();
         return;
     default:
