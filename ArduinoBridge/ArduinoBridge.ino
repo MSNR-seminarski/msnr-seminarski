@@ -16,6 +16,7 @@
 #define CODE_RX_BACKWARD    4
 #define CODE_RX_HORN        6
 #define CODE_RX_ALARM       7
+#define CODE_RX_LIGHT       8
 
 #define MESSAGE_LENGTH      8
 #define DELAY_TIME          1
@@ -62,6 +63,9 @@ void loop()
                 break;
             case CODE_RX_ALARM :
                 rfTx.send(CODE_TX_ALARM, MESSAGE_LENGTH);
+                break;
+            case CODE_RX_LIGHT :
+                rfTx.send(CODE_TX_LIGHT, MESSAGE_LENGTH);
                 break;
             case CODE_RX_STOP :
                 rfTx.send(CODE_TX_STOP, MESSAGE_LENGTH);
