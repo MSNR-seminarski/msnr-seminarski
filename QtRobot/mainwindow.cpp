@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->hornButton, SIGNAL(released()), this, SLOT(buttonReleased()));
     connect(ui->alarmButton, SIGNAL(pressed()), this, SLOT(alarm()));
     connect(ui->alarmButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->lightButton, SIGNAL(pressed()), this, SLOT(lights()));
+    connect(ui->lightButton, SIGNAL(released()), this, SLOT(buttonReleased()));
 
     //ui->centralWidget->installEventFilter(this);
     setFocus();
@@ -97,6 +99,11 @@ void MainWindow::horn()
 void MainWindow::alarm()
 {
     char cValue = 7;
+    this->write(&cValue);
+}
+void MainWindow::lights()
+{
+    char cValue = 8;
     this->write(&cValue);
 }
 
