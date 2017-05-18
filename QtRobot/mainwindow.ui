@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>170</height>
+    <width>240</width>
+    <height>176</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,11 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QPushButton" name="leftButton">
+        <property name="styleSheet">
+         <string>background: #262426</string>
+        </property>
         <property name="text">
-         <string>Left</string>
+         <string/>
         </property>
         <property name="autoRepeatDelay">
          <number>0</number>
@@ -34,8 +37,17 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QPushButton" name="forwardButton">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string>background: #262426</string>
+          </property>
           <property name="text">
-           <string>Forward</string>
+           <string/>
           </property>
           <property name="autoRepeatDelay">
            <number>0</number>
@@ -47,8 +59,17 @@
         </item>
         <item>
          <widget class="QPushButton" name="backButton">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string>background: #262426</string>
+          </property>
           <property name="text">
-           <string>Back</string>
+           <string/>
           </property>
           <property name="autoRepeatDelay">
            <number>0</number>
@@ -62,8 +83,11 @@
       </item>
       <item>
        <widget class="QPushButton" name="rightButton">
+        <property name="styleSheet">
+         <string notr="true">background: #262426</string>
+        </property>
         <property name="text">
-         <string>Right</string>
+         <string/>
         </property>
         <property name="autoRepeatDelay">
          <number>0</number>
@@ -92,8 +116,11 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QPushButton" name="hornButton">
+        <property name="styleSheet">
+         <string notr="true">background: #262426</string>
+        </property>
         <property name="text">
-         <string>Horn</string>
+         <string/>
         </property>
         <property name="autoRepeatDelay">
          <number>0</number>
@@ -105,8 +132,11 @@
       </item>
       <item>
        <widget class="QPushButton" name="alarmButton">
+        <property name="styleSheet">
+         <string notr="true">background: #262426</string>
+        </property>
         <property name="text">
-         <string>Alarm</string>
+         <string/>
         </property>
         <property name="autoRepeatDelay">
          <number>0</number>
@@ -118,8 +148,11 @@
       </item>
       <item>
        <widget class="QPushButton" name="lightButton">
+        <property name="styleSheet">
+         <string notr="true">background: #262426</string>
+        </property>
         <property name="text">
-         <string>Lights</string>
+         <string/>
         </property>
        </widget>
       </item>

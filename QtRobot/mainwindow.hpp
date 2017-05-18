@@ -5,6 +5,7 @@
 #include <QSerialPort>
 #include <QDebug>
 #include <QString>
+#include <QPushButton>
 
 namespace Ui
 {
@@ -25,6 +26,7 @@ private:
 
     void write(const char *str);
     void killFocus(QWidget *w);
+    void setArrows(QPushButton *button, const QString &direction);
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;

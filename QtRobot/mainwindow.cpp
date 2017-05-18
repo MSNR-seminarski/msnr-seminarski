@@ -3,6 +3,8 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDebug>
+#include <QPixmap>
+#include <QIcon>
 
 #define PORT_NAME "/dev/ttyACM0"
 #define BAUD_RATE 9600
@@ -41,6 +43,37 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //ui->centralWidget->installEventFilter(this);
     setFocus();
     killFocus(this);
+
+    setArrows(ui->forwardButton, "forward");
+    setArrows(ui->leftButton, "left");
+    setArrows(ui->rightButton, "right");
+    setArrows(ui->backButton, "back");
+
+    QPixmap pix(":/resources/images/horn.png");
+    QIcon icon(pix);
+    ui->hornButton->setIcon(icon);
+
+    pix = QPixmap(":/resources/images/light.png");
+    icon = QIcon(pix);
+    ui->lightButton->setIcon(icon);
+
+    pix = QPixmap(":/resources/images/padlock.png");
+    icon = QIcon(pix);
+    ui->alarmButton->setIcon(icon);
+
+    QPalette palette = ui->backButton->palette();
+    palette.setColor(QPalette::Button, QColor(Qt::white));
+    ui->backButton->setPalette(palette);
+    ui->backButton->update();
+}
+
+// This is really terrible, but I was in a hurry ¯\_(ツ)_/¯
+void MainWindow::setArrows(QPushButton *button, const QString &direction)
+{
+    const QString img_path = ":/resources/images/arrow_";
+    QPixmap pix(img_path + direction + ".png");
+    QIcon icon(pix);
+    button->setIcon(icon);
 }
 
 void MainWindow::killFocus(QWidget *w)
