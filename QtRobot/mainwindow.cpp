@@ -12,6 +12,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->statusBar->showMessage("Arduino Status | Connecting...");
 
     _serialConnection.setPortName(PORT_NAME);
     _serialConnection.setBaudRate(BAUD_RATE);
@@ -22,7 +23,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     if (!_serialConnection.open(QIODevice::ReadWrite))
     {
+        ui->statusBar->showMessage("Arduino Status | Connection Error");
         qDebug() << _serialConnection.errorString();
+    }
+    else
+    {
+        ui->statusBar->showMessage("Arduino Status | Connection Established");
     }
 
     connect(ui->forwardButton, SIGNAL(pressed()), this, SLOT(forward()));
@@ -52,14 +58,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     QPixmap pix(":/resources/images/horn.png");
     QIcon icon(pix);
     ui->hornButton->setIcon(icon);
+    ui->hornButton->setIconSize(QSize(50, 50));
 
     pix = QPixmap(":/resources/images/light.png");
     icon = QIcon(pix);
     ui->lightButton->setIcon(icon);
+    ui->lightButton->setIconSize(QSize(50, 50));
 
     pix = QPixmap(":/resources/images/padlock.png");
     icon = QIcon(pix);
     ui->alarmButton->setIcon(icon);
+    ui->alarmButton->setIconSize(QSize(40, 40));
 
     QPalette palette = ui->backButton->palette();
     palette.setColor(QPalette::Button, QColor(Qt::white));
@@ -74,6 +83,7 @@ void MainWindow::setArrows(QPushButton *button, const QString &direction)
     QPixmap pix(img_path + direction + ".png");
     QIcon icon(pix);
     button->setIcon(icon);
+    button->setIconSize(QSize(60, 60));
 }
 
 void MainWindow::killFocus(QWidget *w)
