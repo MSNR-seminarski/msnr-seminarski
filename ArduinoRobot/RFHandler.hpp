@@ -4,19 +4,21 @@
 #include <RCSwitch.h>
 
 #define RECEIVE_INTERRUPT_CHANNEL 4
-
+#define INIT_CODE 5234
 
 class RFHandler
 {
 public:
-	void enable() const;
-	void resume() const;
-	int getReceivedCode() const;
-	bool update();
+    void enable() const;
+    int getReceivedCode() const;
+    int getPreviousCode() const;
+    void resume();
+    bool update();
 
 private:
-	int _receivedCode;
-	RCSwitch _instance;
+    int _receivedCode;
+    int _previousCode = INIT_CODE;
+    RCSwitch _instance;
 };
 
 #endif // __RFHANDLER_HPP__

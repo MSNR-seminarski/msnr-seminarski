@@ -40,9 +40,10 @@ private slots:
     void horn();
     void alarm();
     void lights();
-    void buttonReleased();
-
-
+    void alarmButtonReleased();
+    void lightsButtonReleased();
+    void actionButtonReleased();
+    void hornButtonReleased();
 };
 
 #endif // MAINWINDOW_H

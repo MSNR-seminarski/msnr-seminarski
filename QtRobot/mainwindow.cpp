@@ -32,19 +32,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     }
 
     connect(ui->forwardButton, SIGNAL(pressed()), this, SLOT(forward()));
-    connect(ui->forwardButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->forwardButton, SIGNAL(released()), this, SLOT(actionactionButtonReleased()));
     connect(ui->backButton, SIGNAL(pressed()), this, SLOT(back()));
-    connect(ui->backButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->backButton, SIGNAL(released()), this, SLOT(actionButtonReleased()));
     connect(ui->leftButton, SIGNAL(pressed()), this, SLOT(left()));
-    connect(ui->leftButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->leftButton, SIGNAL(released()), this, SLOT(actionButtonReleased()));
     connect(ui->rightButton, SIGNAL(pressed()), this, SLOT(right()));
-    connect(ui->rightButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->rightButton, SIGNAL(released()), this, SLOT(actionButtonReleased()));
     connect(ui->hornButton, SIGNAL(pressed()), this, SLOT(horn()));
-    connect(ui->hornButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->hornButton, SIGNAL(released()), this, SLOT(hornButtonReleased()));
     connect(ui->alarmButton, SIGNAL(pressed()), this, SLOT(alarm()));
-    connect(ui->alarmButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->alarmButton, SIGNAL(released()), this, SLOT(alarmButtonReleased()));
     connect(ui->lightButton, SIGNAL(pressed()), this, SLOT(lights()));
-    connect(ui->lightButton, SIGNAL(released()), this, SLOT(buttonReleased()));
+    connect(ui->lightButton, SIGNAL(released()), this, SLOT(lightsButtonReleased()));
 
     //ui->centralWidget->installEventFilter(this);
     setFocus();
@@ -76,7 +76,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->backButton->update();
 }
 
-// This is really terrible, but I was in a hurry ¯\_(ツ)_/¯
 void MainWindow::setArrows(QPushButton *button, const QString &direction)
 {
     const QString img_path = ":/resources/images/arrow_";
@@ -108,9 +107,28 @@ void MainWindow::write(const char *str)
         }
     }
 }
-void MainWindow::buttonReleased()
+
+void MainWindow::actionButtonReleased()
 {
     char cValue = 5;
+    this->write(&cValue);
+}
+
+void MainWindow::hornButtonReleased()
+{
+    char cValue = 11;
+    this->write(&cValue);
+}
+
+void MainWindow::alarmButtonReleased()
+{
+    char cValue = 12;
+    this->write(&cValue);
+}
+
+void MainWindow::lightsButtonReleased()
+{
+    char cValue = 13;
     this->write(&cValue);
 }
 
@@ -174,6 +192,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     case Qt::Key_H:
         horn();
         return;
+    case Qt::Key_L:
+        lights();
+        return;
     case Qt::Key_Q:
         alarm();
         return;
@@ -195,9 +216,16 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
     case Qt::Key_A:
     case Qt::Key_Right:
     case Qt::Key_D:
+        actionButtonReleased();
+        return;
     case Qt::Key_H:
+        hornButtonReleased();
+        return;
     case Qt::Key_Q:
-        buttonReleased();
+        alarmButtonReleased();
+        return;
+    case Qt::Key_L:
+        lightsButtonReleased();
         return;
     default:
         QMainWindow::keyReleaseEvent(event);

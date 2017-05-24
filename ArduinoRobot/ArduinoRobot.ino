@@ -3,25 +3,27 @@
 #include "RFHandler.hpp"
 #include "Alarm.hpp"
 
+#define MOVE_FORWARD        0b11000111
+#define MOVE_BACKWARDS      0b11001111
+#define TURN_LEFT           0b11000001
+#define TURN_RIGHT          0b11000011
+#define START_HORN          0b11011001
+#define ALARM               0b11011101
+#define STOP_MOVING         0b11011111
+#define LIGHT               0b11010001
+#define STOP_HORN           0b11100101
 
-#define MOVE_FORWARD        3
-#define MOVE_BACKWARDS      4
-#define TURN_LEFT           1
-#define TURN_RIGHT          2
-#define HORN                6
-#define ALARM               7
-#define STOP_MOVING         63
-#define LIGHT 8
-
-static void playHorn();
 static void processResult(int);
 static void moveRobot(float, float);
 static void toggleHorn();
 static void toggleLight();
 static void toggleAlarm();
+static void startHorn();
+static void stopHorn();
 
 Alarm alarm;
 RFHandler rfRx;
+bool lightsStatus = false;
 
 //-----------------------------------------------------------------------------
 // Setup
@@ -42,9 +44,12 @@ void loop()
 
     if (rfRx.update())
     {
-        processResult(rfRx.getReceivedCode());
+        if (rfRx.getPreviousCode() != rfRx.getReceivedCode())
+        {
+            processResult(rfRx.getReceivedCode());
+            rfRx.resume();
+        }
     }
-    rfRx.resume();
 }
 
 void processResult(int receivedCode)
@@ -66,26 +71,43 @@ void processResult(int receivedCode)
         case STOP_MOVING:
             Robot.motorsStop();
             break;
-        case HORN:
-            toggleHorn();
+        case START_HORN:
+            startHorn();
+            break;
+        case STOP_HORN:
+            stopHorn();
             break;
         case ALARM:
             toggleAlarm();
             break;
-    case LIGHT:
-      toggleLight();
-      break;
+        case LIGHT:
+            toggleLight();
+            break;
     }
 }
 
-void toggleHorn()
+void startHorn()
 {
-    Robot.beep(BEEP_SIMPLE);
+    Robot.beep(BEEP_LONG);
+}
+
+void stopHorn()
+{
+    Robot.beep(BEEP_LONG);
 }
 
 void toggleLight()
 {
-  Robot.digitalWrite(TK2, !(Robot.digitalRead(TK2)));
+    if (lightsStatus)
+    {
+        lightsStatus = false;
+        Robot.digitalWrite(TKD1, lightsStatus);
+    }
+    else
+    {
+        lightsStatus = true;
+        Robot.digitalWrite(TKD1, lightsStatus);
+    }
 }
 
 void toggleAlarm()
