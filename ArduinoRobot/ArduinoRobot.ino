@@ -1,3 +1,9 @@
+/* -----------------------------------------------------------------------------
+ *      TKD3 pin  -> Horn
+ *      TKD1 pin  -> LEDs
+ *      RESET pin -> DATA (RF pin)
+-------------------------------------------------------------------------------- */
+
 #include <ArduinoRobot.h>
 #include <RCSwitch.h>
 #include "RFHandler.hpp"
@@ -88,12 +94,12 @@ void processResult(int receivedCode)
 
 void startHorn()
 {
-    Robot.beep(BEEP_LONG);
+    Robot.digitalWrite(TKD3, HIGH);
 }
 
 void stopHorn()
 {
-    Robot.beep(BEEP_LONG);
+    Robot.digitalWrite(TKD3, LOW);
 }
 
 void toggleLight()

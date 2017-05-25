@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     }
 
     connect(ui->forwardButton, SIGNAL(pressed()), this, SLOT(forward()));
-    connect(ui->forwardButton, SIGNAL(released()), this, SLOT(actionactionButtonReleased()));
+    connect(ui->forwardButton, SIGNAL(released()), this, SLOT(actionButtonReleased()));
     connect(ui->backButton, SIGNAL(pressed()), this, SLOT(back()));
     connect(ui->backButton, SIGNAL(released()), this, SLOT(actionButtonReleased()));
     connect(ui->leftButton, SIGNAL(pressed()), this, SLOT(left()));

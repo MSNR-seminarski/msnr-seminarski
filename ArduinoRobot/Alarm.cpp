@@ -18,7 +18,7 @@ void Alarm::update()
 
             if (abs(_lastCompassValue - compass) > 10)
             {
-                Robot.beep(BEEP_SIMPLE);
+                Robot.digitalWrite(TKD3, HIGH);
             }
 
             _lastCompassValue = compass;
@@ -31,6 +31,11 @@ void Alarm::setAlarmState(bool alarmState, int compassValue)
 {
     _alarmState = alarmState;
     _lastCompassValue = compassValue;
+
+    if (!alarmState)
+    {
+        Robot.digitalWrite(TKD3, LOW);
+    }
 }
 
 bool Alarm::getAlarmState() const

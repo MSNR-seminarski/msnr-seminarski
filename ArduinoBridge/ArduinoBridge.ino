@@ -1,3 +1,9 @@
+/* -----------------------------------------------------------------------------
+ *      pin 10 -> DATA
+ *      +5V    -> VCC
+ *      GND    -> GND
+-------------------------------------------------------------------------------- */
+
 #include <RCSwitch.h>
 
 #define CODE_TX_LEFT        0b11000001
@@ -83,6 +89,8 @@ void loop()
                 rfTx.send(CODE_TX_STOP_HORN, MESSAGE_LENGTH);
                 break;
             case CODE_RX_STOP :
+                rfTx.send(CODE_TX_STOP, MESSAGE_LENGTH);
+                delay(1);
                 rfTx.send(CODE_TX_STOP, MESSAGE_LENGTH);
                 break;
         }
